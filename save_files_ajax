@@ -1,0 +1,61 @@
+
+  //this is an asychronous jquery script that allows users to specify the file type;
+  //for the first input as either jpeg, jpg, png or gif
+  //while for the second input, it only allows for xlsx file format i.e excel file format
+  
+  $('#save').click(function(e){
+    e.preventDefault();
+    var exts = [];
+    var exts_1 = [];
+
+var photo = $('input[name = "photo[]"]').val();
+var document = $('input[name = "document[]"]').val();
+
+
+if(photo == ''){
+    alert("photo field cannot be empty")
+    return false;
+}
+
+if(document == ''){
+    alert("document field cannot be empty")
+    return false;
+}
+
+exts = [".jpeg",".jpg",".png",".gif"];
+exts_1 = [".xlsx"];
+
+var regex = new RegExp("([a-zA-Z0-9\s \\.\-:])+("+ exts.join('|') + ")$");
+var regex_1 = new RegExp("([a-zA-Z0-9\s \\.\-:])+("+ exts_1.join('|') + ")$");
+
+if(!regex.test(photo.toLowerCase())){
+    alert("please upload files having extensions "+exts.join(',')+" in Photo field");
+    return false;
+}
+
+if(!regex_1.test(document.toLowerCase())){
+    alert("please upload files having extensions "+exts_1.join(',')+" in Document field");
+    return false;
+}
+$('#msg').html('processing...').show('fast');
+
+var formData = new FormData($($("#loginForm"))[0]);
+
+            $.ajax({
+                type:'POST',                
+                url: "../ajax_expense/add_expense.php",
+                data: formData,
+                cache:false,
+                async: false,
+                contentType: false,
+                processData: false,
+        success:function(data){
+                alert(data);
+            $('#msg').html(data);
+        },
+        error:function(){
+            $('#msg').html('Oops! Pls Retry');
+        }
+    });
+    return false;
+        });
