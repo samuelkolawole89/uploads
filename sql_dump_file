@@ -1,0 +1,42 @@
+/*
+SQLyog Enterprise - MySQL GUI v7.02 
+MySQL - 5.6.17 : Database - expenses
+*********************************************************************
+*/
+
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`expenses` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `expenses`;
+
+/*Table structure for table `expense` 
+this is just a sample database table for the purpose of the task
+*/
+
+DROP TABLE IF EXISTS `expense`;
+
+CREATE TABLE `expense` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `Date` varchar(20) DEFAULT NULL,
+  `Merchant` varchar(50) DEFAULT NULL,
+  `Total` int(10) DEFAULT NULL,
+  `Status` varchar(20) DEFAULT NULL,
+  `Comment` varchar(100) DEFAULT NULL,
+  `Receipt` tinyblob,
+  `document` tinyblob,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+/*Data for the table `expense` */
+
+insert  into `expense`(`id`,`Date`,`Merchant`,`Total`,`Status`,`Comment`,`Receipt`,`document`) values (1,'2023-03-01','Hotel',504,'New','This is new',NULL,NULL),(2,'2023-03-02','Restaurant',605,'Reimbursed','It has been paid',NULL,NULL),(3,'2023-03-02','Breakfast',700,'In Progress','No Comment',NULL,NULL),(4,'2023-03-02','Breakfast',400,'In Progress','No Comment',NULL,NULL),(5,'2023-03-03','Hotel',300,'Reimbursed','It has been paid',NULL,NULL),(6,'2023-03-03','Breakfast',450,'New','Still Fresh',NULL,NULL),(7,'2023-04-16','Fast Food',800,'New','it is new','../picture/IMG_20150223_075817.jpg',NULL),(8,NULL,NULL,NULL,NULL,NULL,'../picture/1-1.jpg','../picture/11655904_1035069626510979_2021248706_o.jpg'),(9,NULL,NULL,NULL,NULL,NULL,'../picture/1-1.jpg','../picture/Bookcctv.xlsx');
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
