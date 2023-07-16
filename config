@@ -1,0 +1,19 @@
+<?php
+
+//here is the database configuration file
+
+
+function db_connect($connectionType = 'mysqli'){
+$HOST = 'localhost';
+$USER = 'root';
+$PSWD = '';
+$DB = 'expenses';
+if ($connectionType === 'mysqli'){
+    return new mysqli($HOST,$USER,$PSWD,$DB);
+}
+else {
+    return "Error connecting to database";
+}
+}
+
+?>
