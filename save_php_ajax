@@ -1,0 +1,38 @@
+<?php
+
+//this is the php script that helps to communicate with our jquery script on the index page
+
+//here is the class that was called from expense.php. There is lies the method necessary to save the record into the database
+include_once('../Classes/expense.php');
+
+
+        $obj_expense = new Expense();
+  $reg_errors = '';
+  $photo = '';
+
+
+    if(isset($_FILES['photo']['name']) && isset($_FILES['document']['name'])){
+    
+    $target = "../picture/";
+        $target = $target. basename($_FILES['photo']['name'][0]);
+        move_uploaded_file($_FILES['photo']['tmp_name'][0], $target);      
+        $photo = "../picture/".$_FILES['photo']['name'][0];
+        
+        $target_1 = "../picture/";
+        $target_1 = $target_1. basename($_FILES['document']['name'][0]);
+        move_uploaded_file($_FILES['document']['tmp_name'][0], $target_1);      
+        $document = "../picture/".$_FILES['document']['name'][0];
+    
+    
+    
+
+         $obj_expense->receipt=$photo;
+         $obj_expense->document=$document;
+
+    
+    $rs = $obj_expense->insertExpense_1();
+$reg_errors .= "Record successfully saved";
+
+     echo $reg_errors;
+
+}
