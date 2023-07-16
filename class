@@ -1,0 +1,56 @@
+<?php
+
+//here is the simple class code that tries to help achieve code reusability
+include_once ('Config.php');
+
+class Expense
+{  
+   
+   var $receipt;
+   var $document;
+     
+   
+   
+   public function getReceipt()
+   {
+       return$this->receipt;
+   }
+   
+   public function setReceipt($receipt)
+   {
+       $this->receipt=$receipt;
+   }
+   
+   public function getDocument()
+   {
+       return$this->document;
+   }
+   
+   public function setDocument($document)
+   {
+       $this->document=$document;
+   }
+
+   
+   public function insertExpense_1()
+   {
+       $mydb = db_connect();
+       $sql = "INSERT INTO expense(Receipt,document)VALUES(?,?)";
+       $stmt= $mydb->prepare($sql);
+      $stmt->bind_param('ss', $this->receipt, $this->document);       
+      $stmt->execute();
+      $result = $stmt->get_result();      
+   }
+   
+   public function getAllExpense_1()
+   {
+       $mydb = db_connect();
+       $sql = "SELECT * from expense";
+       $stmt= $mydb->prepare($sql);    
+      $stmt->execute();
+      $result = $stmt->get_result();
+       return $result;     
+   }
+  
+}
+?>
